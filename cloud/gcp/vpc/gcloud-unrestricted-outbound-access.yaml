@@ -60,14 +60,14 @@ code:
       - sh
       - bash
     source: |
-      gcloud compute firewall-rules list --filter network=$networkName --sort-by priority --format="json(name,disabled,direction,destinationRanges,allowed[].ports)"
+      gcloud compute firewall-rules list --project $projectId --filter network=$networkName --sort-by priority --format="json(name,disabled,direction,destinationRanges,allowed[].ports)"
 
     extractors:
       - type: json
         name: firewallRules
         internal: true
         json:
-          - '.[]'
+          - '.'
 
 javascript:
   - code: |
